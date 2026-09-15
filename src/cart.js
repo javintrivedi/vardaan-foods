@@ -314,7 +314,7 @@ export function initCartSystem() {
 
   // Form Submit Simulation & WhatsApp Redirection
   if (checkoutForm) {
-    checkoutForm.addEventListener('submit', (e) => {
+    checkoutForm.addEventListener('submit', async (e) => {
       e.preventDefault();
       
       const firstName = document.getElementById('checkout-first-name')?.value || '';
@@ -346,50 +346,90 @@ export function initCartSystem() {
       const paymentMethod = document.querySelector('input[name="payment"]:checked')?.value || 'N/A';
       
       let subtotal = 0;
-      let orderItemsText = cartItems.map(item => {
+      cartItems.forEach(item => {
         subtotal += item.price * item.quantity;
-        return `- ${item.product.name} (${item.selectedSize}) x ${item.quantity} = ₹${item.price * item.quantity}`;
-      }).join('\n');
+      });
       
       const discountAmount = Math.round((subtotal * activeDiscount) / 100);
       const finalTotal = subtotal - discountAmount;
-      
-      const message = `*New Order - Vardaan Foods* 🌿\n\n` +
-                      `*Customer Details:*\n` +
-                      `Name: ${firstName} ${lastName}\n` +
-                      `Phone: ${phone}\n` +
-                      `Email: ${email}\n\n` +
-                      `*Delivery Address:*\n` +
-                      `${street} ${apt}\n` +
-                      `${city}, ${state} - ${pin}\n\n` +
-                      `*Order Notes:*\n${notes || 'None'}\n\n` +
-                      `*Order Items:*\n` +
-                      `${orderItemsText}\n\n` +
-                      `*Payment Method:* ${paymentMethod.toUpperCase()}\n` +
-                      `*Total Amount:* ₹${finalTotal}\n\n` +
-                      `Please confirm my order.`;
 
-      const whatsappNumber = "919654466902"; // Real business number
-      const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(message)}`;
-      
-      // Open WhatsApp in new tab
-      window.open(whatsappUrl, '_blank');
+      const finishCheckout = () => {
+        checkoutPage.classList.remove('active');
+        orderSuccessModal.classList.add('active');
 
-      checkoutPage.classList.remove('active');
-      orderSuccessModal.classList.add('active');
+        if (window.confetti) {
+          window.confetti({
+            particleCount: 150,
+            spread: 80,
+            origin: { y: 0.6 },
+            colors: ['#b88655', '#d4a373', '#ffffff', '#a9b388']
+          });
+        }
 
-      if (window.confetti) {
-        window.confetti({
-          particleCount: 150,
-          spread: 80,
-          origin: { y: 0.6 },
-          colors: ['#b88655', '#d4a373', '#ffffff', '#a9b388']
-        });
+        cartItems = [];
+        renderCart();
+      };
+
+      if (paymentMethod === 'cod') {
+        finishCheckout();
+        return;
       }
 
-      cartItems = [];
-      renderCart();
-      updateCartBadge();
+      // Initialize Razorpay for online payments
+      try {
+        const response = await fetch('/api/create-order', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ amount: finalTotal, receipt: 'receipt_' + Date.now() })
+        });
+        
+        const order = await response.json();
+
+        if (order.error) {
+          triggerCartToast('Failed to initialize payment.');
+          return;
+        }
+
+        const options = {
+          key: "rzp_test_YOUR_KEY_HERE", // Should be fetched from backend or env in production
+          amount: order.amount,
+          currency: order.currency,
+          name: "Vardaan Foods",
+          description: "Purchase from Vardaan Foods",
+          order_id: order.id,
+          handler: async function (response) {
+            const verifyRes = await fetch('/api/verify-payment', {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify(response)
+            });
+            const verifyData = await verifyRes.json();
+            
+            if (verifyData.success) {
+              finishCheckout();
+            } else {
+              triggerCartToast('Payment verification failed.');
+            }
+          },
+          prefill: {
+            name: firstName + " " + lastName,
+            email: email,
+            contact: phone
+          },
+          theme: {
+            color: "#d4a373" // Brand gold color
+          }
+        };
+
+        const rzp1 = new window.Razorpay(options);
+        rzp1.on('payment.failed', function (response){
+           triggerCartToast('Payment Failed: ' + response.error.description);
+        });
+        rzp1.open();
+      } catch (err) {
+        console.error(err);
+        triggerCartToast('Payment system is currently unavailable.');
+      }
     });
   }
 
