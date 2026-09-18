@@ -30,15 +30,15 @@ document.addEventListener('DOMContentLoaded', async () => {
 
   // Load All Orders
   async function loadOrders() {
-    // Note: Due to RLS, this will only return all orders if the user's role is 'admin'
+    // 1. Fetch Orders
     const { data: orders, error } = await supabase
       .from('orders')
-      .select('*, profiles(first_name, last_name, email, phone, street, city, state, pin)')
+      .select('*')
       .order('created_at', { ascending: false });
 
     if (error) {
-      console.error(error);
-      ordersList.innerHTML = `<tr><td colspan="6" style="color:red;">Error loading orders</td></tr>`;
+      console.error('Error loading orders:', error);
+      ordersList.innerHTML = `<tr><td colspan="6" style="color:red;">Error loading orders: ${error.message}</td></tr>`;
       return;
     }
 
@@ -46,6 +46,25 @@ document.addEventListener('DOMContentLoaded', async () => {
       ordersList.innerHTML = `<tr><td colspan="6" style="text-align: center;">No orders found.</td></tr>`;
       return;
     }
+
+    // 2. Fetch Profiles for mapping
+    const { data: profiles, error: profError } = await supabase
+      .from('profiles')
+      .select('id, first_name, last_name, email, phone, street, city, state, pin');
+    
+    if (profError) {
+      console.error('Error loading profiles:', profError);
+    }
+
+    // Attach profiles to orders
+    const profilesMap = {};
+    if (profiles) {
+      profiles.forEach(p => profilesMap[p.id] = p);
+    }
+    
+    orders.forEach(o => {
+      o.profiles = profilesMap[o.user_id] || {};
+    });
 
     // Calculate Stats
     document.getElementById('stat-total-orders').textContent = orders.length;
