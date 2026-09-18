@@ -388,6 +388,23 @@ export function initCartSystem() {
               items: cartItems
             }]);
           }
+
+          // Trigger Email Receipt
+          const customerEmail = document.getElementById('checkout-email')?.value.trim();
+          const customerName = document.getElementById('checkout-first-name')?.value.trim();
+          if (customerEmail) {
+            fetch('/api/send-receipt', {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({
+                customerEmail,
+                customerName,
+                orderId,
+                amount: finalTotal,
+                items: cartItems
+              })
+            }).catch(e => console.error("Receipt error:", e));
+          }
         } catch (err) {
           console.error("Error saving order:", err);
         }

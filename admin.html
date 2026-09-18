@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Admin Dashboard | Vardaan Foods</title>
+  <link rel="icon" type="image/png" href="/assets/logo.webp" />
+  <link rel="stylesheet" href="/style.css" />
+  <style>
+    .admin-container {
+      padding: 60px 20px;
+      background: var(--vf-bg);
+      min-height: calc(100vh - 120px);
+    }
+    .admin-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 32px;
+    }
+    .admin-title {
+      font-family: var(--vf-font-serif);
+      font-size: 2rem;
+      color: var(--vf-ink);
+    }
+    .admin-stats {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+      margin-bottom: 40px;
+    }
+    .stat-card {
+      background: #fff;
+      padding: 24px;
+      border-radius: 12px;
+      border: 1px solid var(--vf-line-dark);
+      text-align: center;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.03);
+    }
+    .stat-value {
+      font-size: 2.5rem;
+      font-family: var(--vf-font-serif);
+      color: var(--vf-gold);
+      margin-bottom: 8px;
+    }
+    .stat-label {
+      font-size: 0.95rem;
+      color: var(--vf-ink-muted);
+      font-weight: 500;
+    }
+    .orders-table {
+      width: 100%;
+      background: #fff;
+      border-collapse: collapse;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.03);
+    }
+    .orders-table th, .orders-table td {
+      padding: 16px 24px;
+      text-align: left;
+      border-bottom: 1px solid var(--vf-line-dark);
+    }
+    .orders-table th {
+      background: #fafafa;
+      font-weight: 600;
+      color: var(--vf-ink-muted);
+      font-size: 0.9rem;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+    .orders-table td {
+      font-size: 0.95rem;
+      color: var(--vf-ink);
+    }
+    .status-badge {
+      padding: 6px 12px;
+      border-radius: 20px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      text-transform: uppercase;
+    }
+    .status-paid { background: #dcfce7; color: #166534; }
+    .status-shipped { background: #e0e7ff; color: #3730a3; }
+    .status-delivered { background: #f3f4f6; color: #374151; }
+    
+    .status-select {
+      padding: 8px;
+      border-radius: 6px;
+      border: 1px solid var(--vf-line-dark);
+      background: #fff;
+      font-size: 0.9rem;
+      cursor: pointer;
+    }
+
+    #unauthorized {
+      display: none;
+      text-align: center;
+      padding: 100px 20px;
+    }
+  </style>
+</head>
+<body>
+  <!-- Header / Navigation -->
+  <header class="header" style="background: var(--vf-bg); position: sticky; top: 0; z-index: 100; border-bottom: 1px solid rgba(0,0,0,0.05);">
+    <div class="container header-inner">
+      <a href="/" class="nav-logo">
+        <img src="/assets/logo.webp" alt="Vardaan Foods Logo" style="height: 64px; width: auto;" />
+      </a>
+      <ul class="nav-links">
+        <li><a href="/">Home</a></li>
+        <li><a href="/profile.html">My Account</a></li>
+      </ul>
+    </div>
+  </header>
+
+  <div id="unauthorized">
+    <h1 style="font-family: var(--vf-font-serif); font-size: 3rem; color: #dc2626;">Access Denied</h1>
+    <p style="color: var(--vf-ink-muted); margin-top: 16px;">You must be an administrator to view this page.</p>
+    <a href="/" class="btn btn-primary" style="margin-top: 24px; display: inline-block;">Return Home</a>
+  </div>
+
+  <main class="admin-container container" id="admin-main" style="display: none;">
+    <div class="admin-header">
+      <h1 class="admin-title">Admin Operations</h1>
+    </div>
+
+    <div class="admin-stats">
+      <div class="stat-card">
+        <div class="stat-value" id="stat-total-orders">0</div>
+        <div class="stat-label">Total Orders</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-value" id="stat-total-revenue">₹0</div>
+        <div class="stat-label">Total Revenue</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-value" id="stat-pending">0</div>
+        <div class="stat-label">Pending Shipments</div>
+      </div>
+    </div>
+
+    <table class="orders-table">
+      <thead>
+        <tr>
+          <th>Order ID</th>
+          <th>Date</th>
+          <th>Customer Info</th>
+          <th>Items</th>
+          <th>Total</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody id="admin-orders-list">
+        <tr>
+          <td colspan="6" style="text-align: center; padding: 40px; color: var(--vf-ink-muted);">Loading orders...</td>
+        </tr>
+      </tbody>
+    </table>
+  </main>
+
+  <script type="module" src="/src/admin.js"></script>
+</body>
+</html>

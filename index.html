@@ -1710,7 +1710,53 @@ h1, h2, h3, h4 {
     </div>
   </section>
 
-  <!-- Interactive Wooden Kolhu vs Refined Oil Split Comparison -->
+  <!-- =======================
+       CUSTOMER REVIEWS
+       ======================= -->
+  <section id="reviews" class="section panel" style="background: #fafafa; border-top: 1px solid rgba(0,0,0,0.05);">
+    <div class="container" id="reviews-container">
+      <div style="text-align: center; margin-bottom: 40px;">
+        <h2 class="section-title">Customer Reviews</h2>
+        <p class="section-desc" style="max-width: 500px; margin: 0 auto;">See what our community has to say about our ultra fresh cold pressed oils.</p>
+      </div>
+      
+      <div style="max-width: 600px; margin: 0 auto;">
+        
+        <!-- Submit Review (Hidden if not logged in) -->
+        <div id="review-not-logged-in" style="background: #fff; padding: 20px; border-radius: 8px; border: 1px solid var(--vf-line-dark); text-align: center; margin-bottom: 32px;">
+          <p style="color: var(--vf-ink-muted); margin-bottom: 12px;">You must be logged in to leave a review.</p>
+          <a href="/login.html" class="btn btn-outline" style="font-size: 0.9rem; padding: 8px 16px;">Log in / Register</a>
+        </div>
+        
+        <form id="review-form" style="display: none; flex-direction: column; gap: 16px; background: #fff; padding: 24px; border-radius: 8px; border: 1px solid var(--vf-line-dark); margin-bottom: 32px;">
+          <h3 style="font-family: var(--vf-font-serif); font-size: 1.2rem; color: var(--vf-ink); margin: 0;">Write a Review</h3>
+          <div id="review-error" style="color: #dc2626; font-size: 0.9rem; display: none;"></div>
+          <div id="review-success" style="color: #166534; font-size: 0.9rem; display: none;">Thank you! Your review has been posted.</div>
+          
+          <select id="review-rating" style="padding: 10px; border-radius: 6px; border: 1px solid var(--vf-line-dark); background: #fff; font-size: 1rem; color: var(--vf-gold);" required>
+            <option value="5">★★★★★ - Excellent</option>
+            <option value="4">★★★★☆ - Very Good</option>
+            <option value="3">★★★☆☆ - Average</option>
+            <option value="2">★★☆☆☆ - Poor</option>
+            <option value="1">★☆☆☆☆ - Terrible</option>
+          </select>
+          
+          <textarea id="review-comment" placeholder="What did you think of our products?" style="width: 100%; padding: 12px; border-radius: 6px; border: 1px solid var(--vf-line-dark); min-height: 80px; resize: vertical; font-family: var(--vf-font-sans); color: var(--vf-ink);" required></textarea>
+          <button type="submit" class="btn btn-primary">Submit Review</button>
+        </form>
+
+        <!-- Reviews List -->
+        <div id="reviews-list">
+          <p style="text-align: center; color: var(--vf-ink-muted);">Loading reviews...</p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- =======================
+       COMPARISON SECTION
+       ======================= -->
   <section id="comparison" class="section section-alt panel">
     <div class="container">
       <div class="section-head">
@@ -2104,7 +2150,9 @@ h1, h2, h3, h4 {
     </svg>
   </a>
 
-  <script type="module" src="/main.js"></script>
+  <script type="module" src="/src/cart.js"></script>
+  <script type="module" src="/src/main.js"></script>
   <script type="module" src="/src/auth.js"></script>
+  <script type="module" src="/src/reviews.js"></script>
 </body>
 </html>

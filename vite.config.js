@@ -10,7 +10,8 @@ export default defineConfig({
         privacy: resolve(__dirname, 'privacy.html'),
         login: resolve(__dirname, 'login.html'),
         register: resolve(__dirname, 'register.html'),
-        profile: resolve(__dirname, 'profile.html')
+        profile: resolve(__dirname, 'profile.html'),
+        admin: resolve(__dirname, 'admin.html')
       }
     }
   },
