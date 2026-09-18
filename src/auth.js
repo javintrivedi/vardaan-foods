@@ -125,6 +125,12 @@ document.addEventListener('DOMContentLoaded', async () => {
       document.getElementById('prof-city').value = profile.city || '';
       document.getElementById('prof-state').value = profile.state || '';
       document.getElementById('prof-pin').value = profile.pin || '';
+      
+      // Show Admin Panel link if user is an admin
+      if (profile.role === 'admin') {
+        const adminNavItem = document.getElementById('admin-nav-item');
+        if (adminNavItem) adminNavItem.style.display = 'block';
+      }
     }
 
     // Save profile changes
