@@ -1,6 +1,7 @@
 import { supabase } from './auth.js';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
-document.addEventListener('DOMContentLoaded', () => {
+document.addEventListener('DOMContentLoaded', async () => {
   const reviewsContainer = document.getElementById('reviews-container');
   if (!reviewsContainer) return; // Only run on pages with the reviews section
 
@@ -63,6 +64,14 @@ document.addEventListener('DOMContentLoaded', () => {
           <p style="color: var(--vf-ink-muted); font-size: 0.95rem; line-height: 1.6; margin: 0; padding-left: 52px; font-style: italic;">"${r.comment || ''}"</p>
         </div>
       `).join('');
+
+      // Refresh GSAP ScrollTrigger since the panel height just changed dramatically
+      if (ScrollTrigger) {
+        // Use setTimeout to ensure DOM is fully repainted before refreshing dimensions
+        setTimeout(() => {
+          ScrollTrigger.refresh();
+        }, 100);
+      }
     }
 
     // 2. Check Auth for Submission
