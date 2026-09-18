@@ -1,5 +1,6 @@
 import confetti from 'canvas-confetti';
 import { PRODUCTS } from './productsData.js';
+import { supabase } from './auth.js';
 
 let cartItems = [];
 
@@ -196,9 +197,28 @@ export function initCartSystem() {
   const checkoutPage = document.getElementById('checkout-page');
   const closeCheckoutPageBtn = document.getElementById('close-checkout-page-btn');
   
-  function loadCheckoutData() {
+  async function loadCheckoutData() {
     try {
-      const saved = JSON.parse(localStorage.getItem('vardaanCheckoutData'));
+      let saved = JSON.parse(localStorage.getItem('vardaanCheckoutData'));
+      
+      const { data: { session } } = await supabase.auth.getSession();
+      if (session) {
+        const { data: profile } = await supabase.from('profiles').select('*').eq('id', session.user.id).single();
+        if (profile) {
+          saved = {
+            firstName: profile.first_name || '',
+            lastName: profile.last_name || '',
+            street: profile.street || '',
+            city: profile.city || '',
+            state: profile.state || '',
+            pin: profile.pin || '',
+            phone: profile.phone || '',
+            email: profile.email || session.user.email || '',
+            apt: saved?.apt || ''
+          };
+        }
+      }
+
       if (saved) {
         if(document.getElementById('checkout-first-name')) document.getElementById('checkout-first-name').value = saved.firstName || '';
         if(document.getElementById('checkout-last-name')) document.getElementById('checkout-last-name').value = saved.lastName || '';
@@ -353,9 +373,24 @@ export function initCartSystem() {
       const discountAmount = Math.round((subtotal * activeDiscount) / 100);
       const finalTotal = subtotal - discountAmount;
 
-      const finishCheckout = () => {
+      const finishCheckout = async (orderId = null) => {
         checkoutPage.classList.remove('active');
         orderSuccessModal.classList.add('active');
+
+        try {
+          const { data: { session } } = await supabase.auth.getSession();
+          if (session) {
+            await supabase.from('orders').insert([{
+              user_id: session.user.id,
+              total_amount: finalTotal,
+              status: 'paid',
+              razorpay_order_id: orderId || 'COD',
+              items: cartItems
+            }]);
+          }
+        } catch (err) {
+          console.error("Error saving order:", err);
+        }
 
         if (window.confetti) {
           window.confetti({
@@ -371,7 +406,7 @@ export function initCartSystem() {
       };
 
       if (paymentMethod === 'cod') {
-        finishCheckout();
+        finishCheckout('COD');
         return;
       }
 
@@ -406,7 +441,7 @@ export function initCartSystem() {
             const verifyData = await verifyRes.json();
             
             if (verifyData.success) {
-              finishCheckout();
+              finishCheckout(verifyData.orderId || response.razorpay_order_id);
             } else {
               triggerCartToast('Payment verification failed.');
             }
