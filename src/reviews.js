@@ -19,16 +19,30 @@ document.addEventListener('DOMContentLoaded', () => {
     // 1. Fetch existing reviews
     const { data: reviews, error } = await supabase
       .from('reviews')
-      .select('*, profiles(first_name, last_name)')
+      .select('*')
       .eq('product_id', currentProductId)
       .order('created_at', { ascending: false });
 
     if (error) {
       console.error('Error fetching reviews:', error);
-      reviewsList.innerHTML = '<p>Error loading reviews.</p>';
+      reviewsList.innerHTML = '<p style="color:var(--vf-ink-muted);">Error loading reviews.</p>';
     } else if (!reviews || reviews.length === 0) {
       reviewsList.innerHTML = '<p style="color:var(--vf-ink-muted);">No reviews yet. Be the first to review!</p>';
     } else {
+      // 2. Fetch profiles to stitch manually
+      const { data: profiles, error: profError } = await supabase
+        .from('profiles')
+        .select('id, first_name, last_name');
+        
+      const profilesMap = {};
+      if (profiles) {
+        profiles.forEach(p => profilesMap[p.id] = p);
+      }
+      
+      reviews.forEach(r => {
+        r.profiles = profilesMap[r.user_id] || {};
+      });
+
       reviewsList.innerHTML = reviews.map(r => `
         <div style="background: #fff; padding: 24px; border-radius: 12px; margin-bottom: 20px; box-shadow: 0 4px 15px rgba(0,0,0,0.03); border: 1px solid rgba(212,163,115,0.1); position: relative; overflow: hidden;">
           <div style="position: absolute; top: 0; left: 0; width: 4px; height: 100%; background: var(--vf-gold);"></div>
