@@ -1609,13 +1609,18 @@ h1, h2, h3, h4 {
         <button id="mobile-menu-btn" class="mobile-menu-btn" aria-label="Toggle Menu">
           <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
         </button>
-        <button class="btn btn-outline btn-sm open-quiz-btn">
-          Find My Oil Quiz
-        </button>
         <button id="cart-trigger-btn" class="cart-icon-btn" aria-label="Open Cart Basket">
           <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path><line x1="3" y1="6" x2="21" y2="6"></line><path d="M16 10a4 4 0 0 1-8 0"></path></svg>
           <span id="cart-badge" class="cart-badge">1</span>
         </button>
+
+        <div id="auth-header-container" style="display: flex; align-items: center; margin-left: 8px;">
+          <a href="/login.html" id="auth-login-link" style="font-weight: 600; color: var(--vf-ink); font-size: 0.9rem; text-decoration: none; padding: 8px 12px; border-radius: 8px; transition: background 0.2s;">Login</a>
+          
+          <a href="/profile.html" id="auth-profile-icon" style="display: none; align-items: center; justify-content: center; width: 36px; height: 36px; border-radius: 50%; background: var(--vf-gold); color: #fff; text-decoration: none; font-weight: 600; font-family: var(--vf-font-serif); border: 2px solid #fff; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
+            V
+          </a>
+        </div>
       </div>
     </div>
   </header>
@@ -2100,5 +2105,6 @@ h1, h2, h3, h4 {
   </a>
 
   <script type="module" src="/main.js"></script>
+  <script type="module" src="/src/auth.js"></script>
 </body>
 </html>
