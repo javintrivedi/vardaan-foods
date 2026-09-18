@@ -55,7 +55,11 @@ app.post('/api/verify-payment', (req, res) => {
   }
 });
 
-const PORT = process.env.PORT || 3000;
-app.listen(PORT, () => {
-  console.log(`Razorpay Backend Server listening on port ${PORT}`);
-});
+if (process.env.NODE_ENV !== 'production' && !process.env.VERCEL) {
+  const PORT = process.env.PORT || 3000;
+  app.listen(PORT, () => {
+    console.log(`Razorpay Backend Server listening on port ${PORT}`);
+  });
+}
+
+export default app;
