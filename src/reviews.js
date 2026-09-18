@@ -30,15 +30,23 @@ document.addEventListener('DOMContentLoaded', () => {
       reviewsList.innerHTML = '<p style="color:var(--vf-ink-muted);">No reviews yet. Be the first to review!</p>';
     } else {
       reviewsList.innerHTML = reviews.map(r => `
-        <div style="background:#fff; border:1px solid var(--vf-line-dark); padding:16px; border-radius:8px; margin-bottom:12px;">
-          <div style="display:flex; justify-content:space-between; margin-bottom:8px;">
-            <strong style="color:var(--vf-ink);">${r.profiles?.first_name || 'Anonymous'} ${r.profiles?.last_name?.charAt(0) || ''}.</strong>
-            <span style="color:var(--vf-gold);">
+        <div style="background: #fff; padding: 24px; border-radius: 12px; margin-bottom: 20px; box-shadow: 0 4px 15px rgba(0,0,0,0.03); border: 1px solid rgba(212,163,115,0.1); position: relative; overflow: hidden;">
+          <div style="position: absolute; top: 0; left: 0; width: 4px; height: 100%; background: var(--vf-gold);"></div>
+          <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 12px;">
+            <div style="display: flex; align-items: center; gap: 12px;">
+              <div style="width: 40px; height: 40px; border-radius: 50%; background: #fdfbf7; color: var(--vf-gold); display: flex; align-items: center; justify-content: center; font-weight: 600; border: 1px solid rgba(212,163,115,0.2);">
+                ${r.profiles?.first_name ? r.profiles.first_name.charAt(0).toUpperCase() : 'V'}
+              </div>
+              <div>
+                <strong style="color: var(--vf-ink); display: block; font-size: 1.05rem;">${r.profiles?.first_name || 'Verified'} ${r.profiles?.last_name?.charAt(0) || 'Buyer'}.</strong>
+                <span style="font-size: 0.8rem; color: var(--vf-ink-muted);">${new Date(r.created_at).toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' })}</span>
+              </div>
+            </div>
+            <div style="color: var(--vf-gold); font-size: 1.1rem; letter-spacing: 2px;">
               ${'★'.repeat(r.rating)}${'☆'.repeat(5 - r.rating)}
-            </span>
+            </div>
           </div>
-          <p style="color:var(--vf-ink-muted); font-size:0.9rem; margin:0;">${r.comment || ''}</p>
-          <div style="font-size:0.75rem; color:#aaa; margin-top:8px;">${new Date(r.created_at).toLocaleDateString()}</div>
+          <p style="color: var(--vf-ink-muted); font-size: 0.95rem; line-height: 1.6; margin: 0; padding-left: 52px; font-style: italic;">"${r.comment || ''}"</p>
         </div>
       `).join('');
     }
