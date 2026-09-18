@@ -391,7 +391,7 @@ export function initCartSystem() {
         }
 
         const options = {
-          key: "rzp_test_YOUR_KEY_HERE", // Should be fetched from backend or env in production
+          key: import.meta.env.VITE_RAZORPAY_KEY_ID, // Fetched from Vercel env
           amount: order.amount,
           currency: order.currency,
           name: "Vardaan Foods",
