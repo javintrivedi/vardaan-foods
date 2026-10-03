@@ -7,7 +7,7 @@
   <!-- SEO & Primary Meta Tags -->
   <title>Vardaan Foods — Traditional Wooden Kolhu Cold Pressed Edible Oils</title>
   <meta name="title" content="Vardaan Foods — Traditional Wooden Kolhu Cold Pressed Edible Oils">
-  <meta name="description" content="100% Wood Cold Pressed Edible Oils. Zero heat, zero chemicals, zero compromise. Discover our Kachi Ghani mustard oil, virgin coconut oil, and A2 Gir Cow Bilona Ghee." />
+  <meta name="description" content="100% Wood Cold Pressed Edible Oils. Zero heat, zero chemicals, zero compromise. Discover our Lakdi Kachi Ghani mustard oil, virgin coconut oil, and A2 Gir Cow Bilona Ghee." />
   
   <!-- Open Graph / Facebook / WhatsApp -->
   <meta property="og:type" content="website">
@@ -1308,35 +1308,26 @@ h1, h2, h3, h4 {
   z-index: 2;
 }
 
-.intro-massive-text {
-  font-family: 'Arial Black', Impact, sans-serif;
-  font-size: clamp(80px, 18vw, 300px);
-  font-weight: 900;
-  text-transform: uppercase;
-  margin: 0;
-  line-height: 1.1;
-  background: linear-gradient(-45deg, #2b1d0c, #734f26, #b8853b, #efca6e, #fffdf2, #efca6e, #b8853b, #734f26, #2b1d0c);
-  background-size: 400% 400%;
-  animation: flowingGold 8s ease-in-out infinite;
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
+.intro-logo {
+  height: clamp(120px, 22vw, 260px);
+  width: auto;
+  /* starts huge, animates to normal size via GSAP */
+  transform-origin: center center;
+  filter: drop-shadow(0 0 40px rgba(239,202,110,0.35));
   z-index: 1;
+  margin: 8px 0 20px;
 }
 
-@keyframes flowingGold {
-  0% { background-position: 0% 50%; }
-  50% { background-position: 100% 50%; }
-  100% { background-position: 0% 50%; }
-}
-
-.intro-bottom-text {
+.intro-tagline {
   font-family: Georgia, serif;
   font-style: italic;
-  font-size: clamp(1.2rem, 2vw, 1.8rem);
+  font-size: clamp(1rem, 2vw, 1.55rem);
   color: var(--vf-paper-subtle);
-  margin-top: 10px;
+  max-width: 680px;
+  line-height: 1.55;
+  margin: 0 auto;
   z-index: 2;
+  padding: 0 24px;
 }
 .payment-methods-grid {
   display: grid;
@@ -1625,27 +1616,12 @@ h1, h2, h3, h4 {
     </div>
   </header>
 
-  <!-- Image-Clipped Intro Screen (Preloader) -->
+  <!-- Intro Screen (Preloader) -->
   <div id="intro" class="intro-screen">
     <div class="intro-content">
-      <span class="intro-top-text">Experience</span>
-      <div style="mix-blend-mode: multiply; width: 100%; display: flex; justify-content: center;">
-        <div class="video-mask-wrapper" style="position: relative; overflow: hidden; display: inline-block;">
-          <!-- Dummy hidden text to provide exact dimensions -->
-          <h1 class="intro-massive-text" style="visibility: hidden; margin: 0; padding: 0; line-height: 1.1;">VARDAAN</h1>
-          
-          <!-- Video layer -->
-          <video autoplay loop muted playsinline style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; z-index: 0;">
-            <source src="/assets/121876-724720092.mp4" type="video/mp4">
-          </video>
-          
-          <!-- Screen Mask Overlay -->
-          <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: #fff; color: #000; mix-blend-mode: screen; z-index: 1; display: flex; align-items: center; justify-content: center;">
-            <h1 class="intro-massive-text" style="background: none; -webkit-background-clip: unset; background-clip: unset; color: inherit; animation: none; margin: 0; padding: 0; line-height: 1.1; width: 100%; text-align: center;">VARDAAN</h1>
-          </div>
-        </div>
-      </div>
-      <span class="intro-bottom-text">of ultra fresh Wood Cold Pressed Oil</span>
+      <span class="intro-top-text">Experience Vardaan</span>
+      <img src="/assets/logo.webp" alt="Vardaan Foods" class="intro-logo" />
+      <p class="intro-tagline">of ultra-fresh Wood Cold-Pressed Oils, Vedic Bilona Cow Ghee &amp; Natural Superfoods</p>
     </div>
   </div>
   <!-- Hero Section with Interactive 3D WebGL Canvas -->
@@ -1659,7 +1635,7 @@ h1, h2, h3, h4 {
           Good Health, Poured From A <span class="text-gold">Wooden Kolhu</span>
         </h1>
         <p class="hero-subtitle">
-          Slow, low-temperature pressing that preserves natural antioxidants, authentic aroma, and vital omega fatty acids — zero heat, zero hexane chemicals, zero compromise.
+          Low RPM &amp; Low temperature pressing preserves natural antioxidants, vital omega fatty acids, rich nutrition &amp; authentic aroma.
         </p>
 
         <div class="hero-cta-group">
@@ -1678,7 +1654,7 @@ h1, h2, h3, h4 {
             <p>Happy Families Nourished</p>
           </div>
           <div class="stat-box">
-            <h3><span class="counter-val temp-val" data-target="32" data-suffix="°C">0</span></h3>
+            <h3><span class="counter-val temp-val" data-target="40" data-suffix="°C">0</span></h3>
             <p>Max Cold Press Temp</p>
           </div>
           <div class="stat-box">
@@ -1699,9 +1675,9 @@ h1, h2, h3, h4 {
   <!-- Product Shop Catalog -->
   <section id="shop" class="section panel">
     <div class="container">
-      <div class="section-head">
-        <h2>Discover Our <span class="text-gold">Cold Pressed Oils</span></h2>
-        <p>Extracted using traditional wooden mills from premium sun-dried seeds. Tested for 100% purity.</p>
+      <div class="section-head" style="max-width: 100%;">
+        <h2>Discover our <span class="text-gold">Traditional Nutrition's</span> for your<br><span class="text-gold">Everyday Wellness</span></h2>
+        <p>Crafted with care. Tested for 100% purity.</p>
       </div>
 
       <div id="products-container" class="products-grid">
@@ -1809,12 +1785,15 @@ h1, h2, h3, h4 {
           <button type="submit" class="review-submit-btn">Submit Review</button>
         </form>
 
-        <!-- Reviews List -->
+      </div> <!-- End of 600px container for the form -->
+
+      <!-- Reviews List Carousel -->
+      <div id="reviews-carousel-wrapper" style="overflow: hidden; width: 100%; margin-top: 40px; padding: 20px 0;">
         <div id="reviews-list">
           <p style="text-align: center; color: var(--vf-ink-muted);">Loading reviews...</p>
         </div>
-
       </div>
+
     </div>
   </section>
 
@@ -1833,10 +1812,11 @@ h1, h2, h3, h4 {
         <div class="comparison-before">
           <h3>❌ Factory Refined Oils</h3>
           <ul style="margin-top:16px; list-style:none; line-height:2.0; font-size:0.95rem;">
-            <li>⚠️ Extracted at extreme temperatures (>200°C) destroying vitamins.</li>
-            <li>⚠️ Treated with Hexane chemical solvents & phosphoric acid.</li>
-            <li>⚠️ Chemically bleached & deodorized to remove natural aroma.</li>
-            <li>⚠️ High in harmful trans-fats and free radicals.</li>
+            <li>⚠️ Processed at high temperatures, which may reduce naturally occurring nutrients.</li>
+            <li>⚠️ Often undergo multiple refining stages, including solvent extraction, bleaching, and deodorization.</li>
+            <li>⚠️ Natural aroma, flavor, and color are altered during processing.</li>
+            <li>⚠️ Lacks the distinctive taste and character of traditionally wood-pressed oils.</li>
+            <li>⚠️ Designed for mass production rather than traditional oil extraction.</li>
           </ul>
         </div>
 
@@ -1844,10 +1824,11 @@ h1, h2, h3, h4 {
         <div class="comparison-after">
           <h3>✅ Vardaan Wooden Kolhu Oil</h3>
           <ul style="margin-top:16px; list-style:none; line-height:2.0; font-size:0.95rem;">
-            <li>🌱 Slow crushed in Wooden Kolhu (Chekku) under 35°C.</li>
-            <li>🌱 100% Chemical Free — Zero Hexane or Bleaching agents.</li>
-            <li>🌱 Retains natural Allyl Isothiocyanate & Vitamin E.</li>
-            <li>🌱 Authentic deep golden color, rich flavor & natural aroma.</li>
+            <li>🌱 Traditionally slow-crushed in a wooden kolhu at low temperatures to preserve nature's goodness.</li>
+            <li>🌱 100% pure and chemical-free, with no hexane extraction, bleaching, or refining.</li>
+            <li>🌱 Naturally rich in Allyl Isothiocyanate and Vitamin E.</li>
+            <li>🌱 Distinctive golden hue, robust flavor, and authentic mustard aroma.</li>
+            <li>🌱 Crafted using time-honored methods for wholesome everyday cooking.</li>
           </ul>
         </div>
 
@@ -1863,29 +1844,72 @@ h1, h2, h3, h4 {
     <div class="container">
       <div class="section-head">
         <h2>From Farm Seed To <span class="text-gold">Your Kitchen</span></h2>
-        <p>Our 4-step uncompromised Vedic extraction process.</p>
+        <p>Our 4-step uncompromised Traditional Kolhu extraction process.</p>
       </div>
 
       <div class="process-grid">
-        <div class="process-card tilt-card">
-          <span class="process-num">01</span>
-          <h3>Seed Sourcing</h3>
-          <p>Hand-picked, high-density seeds directly procured from verified farmers in Rajasthan, UP, and Gujarat.</p>
+        <!-- Step 1 -->
+        <div onmouseenter="this.querySelector('.ptxt').style.opacity='0';this.querySelector('.pimg').style.opacity='1';" onmouseleave="this.querySelector('.ptxt').style.opacity='1';this.querySelector('.pimg').style.opacity='0';" style="position:relative;width:100%;height:300px;border-radius:12px;overflow:hidden;cursor:pointer;border:1px solid rgba(212,163,115,0.15);">
+          <div class="ptxt" style="position:absolute;top:0;left:0;width:100%;height:100%;background:var(--vf-bg-card);padding:32px 24px;box-sizing:border-box;z-index:2;transition:opacity 0.5s ease;display:flex;flex-direction:column;justify-content:flex-start;text-align:left;">
+            <span style="font-family:var(--vf-font-serif);font-size:3rem;font-weight:800;color:rgba(212,163,115,0.2);line-height:1;margin-bottom:16px;display:block;">01</span>
+            <h3 style="font-size:1.15rem;margin-bottom:10px;color:var(--vf-ink);">Seed Sourcing</h3>
+            <p style="font-size:0.9rem;color:var(--vf-ink-muted);line-height:1.6;">Hand-picked, high-density seeds directly procured from verified farmers in Rajasthan, UP, and Gujarat.</p>
+          </div>
+          <div class="pimg" style="position:absolute;top:0;left:0;width:100%;height:100%;z-index:1;opacity:0;transition:opacity 0.5s ease;">
+            <img src="/assets/seed_sourcing.jpg" alt="Seed Sourcing" style="width:100%;height:100%;object-fit:cover;">
+            <div style="position:absolute;bottom:0;left:0;width:100%;padding:20px;background:linear-gradient(to top,rgba(14,24,20,0.85),transparent);">
+              <span style="color:rgba(255,255,255,0.2);font-family:var(--vf-font-serif);font-size:2rem;font-weight:800;display:block;">01</span>
+              <h3 style="color:#fff;font-size:1.1rem;margin:0;">Seed Sourcing</h3>
+            </div>
+          </div>
         </div>
-        <div class="process-card tilt-card">
-          <span class="process-num">02</span>
-          <h3>Wooden Kolhu Press</h3>
-          <p>Slow rotation in a solid wooden mortar (Lakdi Ghani) ensures friction heat never exceeds ambient temperature.</p>
+
+        <!-- Step 2 -->
+        <div onmouseenter="this.querySelector('.ptxt').style.opacity='0';this.querySelector('.pimg').style.opacity='1';" onmouseleave="this.querySelector('.ptxt').style.opacity='1';this.querySelector('.pimg').style.opacity='0';" style="position:relative;width:100%;height:300px;border-radius:12px;overflow:hidden;cursor:pointer;border:1px solid rgba(212,163,115,0.15);">
+          <div class="ptxt" style="position:absolute;top:0;left:0;width:100%;height:100%;background:var(--vf-bg-card);padding:32px 24px;box-sizing:border-box;z-index:2;transition:opacity 0.5s ease;display:flex;flex-direction:column;justify-content:flex-start;text-align:left;">
+            <span style="font-family:var(--vf-font-serif);font-size:3rem;font-weight:800;color:rgba(212,163,115,0.2);line-height:1;margin-bottom:16px;display:block;">02</span>
+            <h3 style="font-size:1.15rem;margin-bottom:10px;color:var(--vf-ink);">Wooden Kolhu Press</h3>
+            <p style="font-size:0.9rem;color:var(--vf-ink-muted);line-height:1.6;">Slow rotation in a solid wooden mortar (Lakdi Ghani) ensures friction heat never exceeds ambient temperature.</p>
+          </div>
+          <div class="pimg" style="position:absolute;top:0;left:0;width:100%;height:100%;z-index:1;opacity:0;transition:opacity 0.5s ease;">
+            <img src="/assets/wooden_kolhu_process.webp" alt="Wooden Kolhu Press" style="width:100%;height:100%;object-fit:cover;">
+            <div style="position:absolute;bottom:0;left:0;width:100%;padding:20px;background:linear-gradient(to top,rgba(14,24,20,0.85),transparent);">
+              <span style="color:rgba(255,255,255,0.2);font-family:var(--vf-font-serif);font-size:2rem;font-weight:800;display:block;">02</span>
+              <h3 style="color:#fff;font-size:1.1rem;margin:0;">Wooden Kolhu Press</h3>
+            </div>
+          </div>
         </div>
-        <div class="process-card tilt-card">
-          <span class="process-num">03</span>
-          <h3>Natural Sedimentation</h3>
-          <p>Allowed to settle naturally in food-grade steel tanks. Zero chemical filtration or bleaching.</p>
+
+        <!-- Step 3 -->
+        <div onmouseenter="this.querySelector('.ptxt').style.opacity='0';this.querySelector('.pimg').style.opacity='1';" onmouseleave="this.querySelector('.ptxt').style.opacity='1';this.querySelector('.pimg').style.opacity='0';" style="position:relative;width:100%;height:300px;border-radius:12px;overflow:hidden;cursor:pointer;border:1px solid rgba(212,163,115,0.15);">
+          <div class="ptxt" style="position:absolute;top:0;left:0;width:100%;height:100%;background:var(--vf-bg-card);padding:32px 24px;box-sizing:border-box;z-index:2;transition:opacity 0.5s ease;display:flex;flex-direction:column;justify-content:flex-start;text-align:left;">
+            <span style="font-family:var(--vf-font-serif);font-size:3rem;font-weight:800;color:rgba(212,163,115,0.2);line-height:1;margin-bottom:16px;display:block;">03</span>
+            <h3 style="font-size:1.15rem;margin-bottom:10px;color:var(--vf-ink);">Natural Sedimentation</h3>
+            <p style="font-size:0.9rem;color:var(--vf-ink-muted);line-height:1.6;">Allowed to settle naturally in food-grade steel tanks. Zero chemical filtration or bleaching.</p>
+          </div>
+          <div class="pimg" style="position:absolute;top:0;left:0;width:100%;height:100%;z-index:1;opacity:0;transition:opacity 0.5s ease;">
+            <img src="/assets/natural_sedimentation.jpg" alt="Natural Sedimentation" style="width:100%;height:100%;object-fit:cover;">
+            <div style="position:absolute;bottom:0;left:0;width:100%;padding:20px;background:linear-gradient(to top,rgba(14,24,20,0.85),transparent);">
+              <span style="color:rgba(255,255,255,0.2);font-family:var(--vf-font-serif);font-size:2rem;font-weight:800;display:block;">03</span>
+              <h3 style="color:#fff;font-size:1.1rem;margin:0;">Natural Sedimentation</h3>
+            </div>
+          </div>
         </div>
-        <div class="process-card tilt-card">
-          <span class="process-num">04</span>
-          <h3>Eco Glass Bottling</h3>
-          <p>Sealed in thick recyclable glass bottles to preserve essential volatile nutrients and prevent oxidation.</p>
+
+        <!-- Step 4 -->
+        <div onmouseenter="this.querySelector('.ptxt').style.opacity='0';this.querySelector('.pimg').style.opacity='1';" onmouseleave="this.querySelector('.ptxt').style.opacity='1';this.querySelector('.pimg').style.opacity='0';" style="position:relative;width:100%;height:300px;border-radius:12px;overflow:hidden;cursor:pointer;border:1px solid rgba(212,163,115,0.15);">
+          <div class="ptxt" style="position:absolute;top:0;left:0;width:100%;height:100%;background:var(--vf-bg-card);padding:32px 24px;box-sizing:border-box;z-index:2;transition:opacity 0.5s ease;display:flex;flex-direction:column;justify-content:flex-start;text-align:left;">
+            <span style="font-family:var(--vf-font-serif);font-size:3rem;font-weight:800;color:rgba(212,163,115,0.2);line-height:1;margin-bottom:16px;display:block;">04</span>
+            <h3 style="font-size:1.15rem;margin-bottom:10px;color:var(--vf-ink);">Eco Glass Bottling</h3>
+            <p style="font-size:0.9rem;color:var(--vf-ink-muted);line-height:1.6;">Sealed in thick recyclable glass bottles to preserve essential volatile nutrients and prevent oxidation.</p>
+          </div>
+          <div class="pimg" style="position:absolute;top:0;left:0;width:100%;height:100%;z-index:1;opacity:0;transition:opacity 0.5s ease;">
+            <img src="/assets/hero_oil_bottle.webp" alt="Eco Glass Bottling" style="width:100%;height:100%;object-fit:cover;">
+            <div style="position:absolute;bottom:0;left:0;width:100%;padding:20px;background:linear-gradient(to top,rgba(14,24,20,0.85),transparent);">
+              <span style="color:rgba(255,255,255,0.2);font-family:var(--vf-font-serif);font-size:2rem;font-weight:800;display:block;">04</span>
+              <h3 style="color:#fff;font-size:1.1rem;margin:0;">Eco Glass Bottling</h3>
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -1893,7 +1917,7 @@ h1, h2, h3, h4 {
 
   <!-- Interactive Quiz Banner -->
   <section id="quiz-banner" class="section section-alt panel" style="position:relative; overflow:hidden; text-align:center;">
-    <div class="quiz-bg-artifact" style="position:absolute; top:0; left:0; width:100%; height:100%; background: url('/assets/mandala_cow.webp') no-repeat center/contain; mix-blend-mode: multiply; opacity: 0.12; pointer-events:none; z-index:0; transform: scale(1.6);"></div>
+    <img src="/assets/mandala_cow.webp" alt="" aria-hidden="true" style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%) scale(1.6);width:100%;height:100%;object-fit:contain;opacity:0.09;pointer-events:none;z-index:0;">
     <div class="container" style="max-width:800px; position:relative; z-index:1;">
       <span class="hero-badge" style="background:var(--vf-bg-card);">Smart Oil Recommendation Engine</span>
       <h2 style="font-size:2.4rem; margin:16px 0;">Not sure which oil suits your health goals?</h2>
@@ -1920,7 +1944,7 @@ h1, h2, h3, h4 {
             <span style="color:var(--vf-gold); font-size:1.4rem;">+</span>
           </summary>
           <p style="color:var(--vf-ink-muted); margin-top:12px; line-height:1.6;">
-            Normal cold-pressed machines often use metal screws which generate friction heat up to 60°C-70°C. Vardaan uses wooden pestle & mortar (Lakdi Ghani), which absorbs friction heat and keeps oil temperature under 35°C, preserving 100% of sensitive antioxidants.
+            Normal cold-pressed machines often use metal screws which generate friction heat up to 60°C-70°C. Vardaan uses wooden pestle &amp; mortar (Lakdi Ghani), which absorbs friction heat and keeps oil temperature under 35°C, preserving 100% of sensitive antioxidants.
           </p>
         </details>
 
@@ -1955,7 +1979,7 @@ h1, h2, h3, h4 {
           <div class="nav-logo">
             <img src="/assets/logo.webp" alt="Vardaan Foods Logo" style="height: 80px; width: auto;" />
           </div>
-          <p>Traditional wood-pressed edible oils crafted with integrity, love, and ancient Indian wisdom. 100% natural, unrefined, and lab tested.</p>
+          <p>Traditional wood-pressed edible oils, Vedic Bilona Cow Ghee & Natural Superfood crafted with integrity, love, and ancient Indian wisdom. 100% natural, unrefined, Traditional, and lab tested.</p>
         </div>
 
         <div class="footer-col">
@@ -1973,7 +1997,6 @@ h1, h2, h3, h4 {
           <h4>Company</h4>
           <ul>
             <li><a href="/about.html">About Us</a></li>
-            <li><a href="#process">Our Story</a></li>
             <li><a href="#comparison">Wooden Kolhu Science</a></li>
             <li><a href="/privacy.html">Privacy Policy</a></li>
             <li><a href="#faq">FAQ</a></li>
@@ -1983,7 +2006,7 @@ h1, h2, h3, h4 {
 
         <div class="footer-col">
           <h4>Purity Guarantee</h4>
-          <p style="font-size:0.85rem; color:var(--vf-ink-muted); margin-bottom:12px;">FSSAI License: 10824999000124</p>
+          <p style="font-size:0.85rem; color:var(--vf-ink-muted); margin-bottom:12px;">FSSAI License: 22226043000697</p>
           <button class="btn btn-outline btn-sm" onclick="openLabReport('mustard-oil-1l')">
             View Lab Report Certificate
           </button>
@@ -2207,7 +2230,7 @@ h1, h2, h3, h4 {
   </div>
 
   <!-- FLOATING WHATSAPP WIDGET -->
-  <a href="https://wa.me/919654466902?text=Hi!%20I%20have%20a%20question%20about%20Vardaan%20Foods..." target="_blank" id="whatsapp-widget" class="whatsapp-widget" aria-label="Chat with us on WhatsApp">
+  <a href="https://wa.me/919266159868?text=Hi!%20I%20have%20a%20question%20about%20Vardaan%20Foods..." target="_blank" id="whatsapp-widget" class="whatsapp-widget" aria-label="Chat with us on WhatsApp">
     <svg width="32" height="32" viewBox="0 0 24 24" fill="white">
       <path d="M12.031 21.492c-1.636 0-3.23-.437-4.636-1.263l-.333-.196-3.447.904.921-3.36-.215-.343a9.49 9.49 0 0 1-1.455-5.07c0-5.234 4.263-9.497 9.5-9.497 2.535 0 4.916.988 6.708 2.781 1.792 1.791 2.779 4.172 2.779 6.706 0 5.235-4.264 9.498-9.497 9.498z" fill="#25D366" />
       <path d="M12.031 3.513c-4.966 0-9.006 4.041-9.006 9.008 0 1.587.414 3.136 1.202 4.5l-1.278 4.664 4.773-1.251a8.995 8.995 0 0 0 4.31 1.092h.004c4.965 0 9.006-4.041 9.006-9.007 0-2.408-.938-4.671-2.64-6.374a8.956 8.956 0 0 0-6.371-2.632zM16.992 15.68c-.244.693-1.408 1.328-1.929 1.411-.497.079-1.127.182-3.14-.652-2.42-1.002-3.953-3.468-4.075-3.63-.122-.163-.974-1.296-.974-2.47 0-1.173.61-1.75.834-1.99.224-.241.488-.302.65-.302.163 0 .326 0 .468.007.151.008.353-.058.552.423.204.494.712 1.737.773 1.859.061.122.102.264.02.426-.081.163-.122.264-.244.407-.122.143-.263.315-.366.417-.113.111-.231.232-.105.45.127.218.563.93 1.209 1.503.832.738 1.536.967 1.761 1.07.224.102.355.081.487-.06.133-.143.568-.66.721-.885.153-.224.305-.188.508-.112.204.077 1.29.61 1.514.721.224.113.375.168.431.261.056.094.056.544-.188 1.237z" />
