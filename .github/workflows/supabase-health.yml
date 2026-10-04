@@ -3,6 +3,7 @@ name: Supabase Health Check
 on:
   schedule:
     - cron: '30 5 * * *'
+    - cron: '30 17 * * *'
   workflow_dispatch:
 
 jobs:
