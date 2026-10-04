@@ -1,0 +1,17 @@
+name: Supabase Health Check
+
+on:
+  schedule:
+    - cron: '30 5 * * *'
+  workflow_dispatch:
+
+jobs:
+  ping-supabase:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Ping Vardaan Foods Supabase
+        run: |
+          curl --fail \
+          "https://hkxkrvjnsghvyzpxnvip.supabase.co/rest/v1/healthcheck?select=id" \
+          -H "apikey: ${{ secrets.SUPABASE_ANON_KEY }}"
